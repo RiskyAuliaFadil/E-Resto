@@ -75,6 +75,9 @@ flutter:
     - assets/images/rendang.png
     - assets/images/teamanis.png
     - assets/images/telurdadar.png
+    - assets/images/logo_warteg.png
+    - assets/images/Dinein.png
+    - assets/images/take-away.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
