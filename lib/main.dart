@@ -1,7 +1,10 @@
 import 'package:e_resto/beranda.dart';
+import 'package:e_resto/cash_pembayaran.dart';
+import 'package:e_resto/dine_in-makanan.dart';
 import 'package:e_resto/dine_in.dart';
 import 'package:e_resto/login.dart';
 import 'package:e_resto/pembayaran.dart';
+import 'package:e_resto/profile.dart';
 import 'package:e_resto/register.dart';
 import 'package:flutter/material.dart';
 

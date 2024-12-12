@@ -1,5 +1,7 @@
 import 'package:e_resto/dine_in-makanan.dart';
 import 'package:e_resto/dine_in.dart';
+import 'package:e_resto/pesanan_anda.dart';
+import 'package:e_resto/profile.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,10 +11,43 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+
   void _onNavBarTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (_selectedIndex != index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+
+      // Navigasi berdasarkan index
+      switch (index) {
+        case 0:
+          // Stay di halaman HomePage
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+          break;
+        case 1:
+          // Pindah ke halaman CheckoutScreen
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => CheckoutScreen(
+          //       selectedItems: selectedItems, // Pastikan variabel ini benar
+          //       menuItems: menuItems,
+          //     ),
+          //   ),
+          // );
+          break;
+        case 2:
+          // Pindah ke halaman ProfilePage
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+          break;
+      }
+    }
   }
 
   bool showPromo = true; // Untuk mengontrol tampilan Promo atau Best Seller
@@ -152,7 +187,8 @@ class _HomePageState extends State<HomePage> {
                             // Aksi untuk Take Away
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DineInMakanan()),
+                              MaterialPageRoute(
+                                  builder: (context) => DineInMakanan()),
                             );
                           },
                           child: Container(

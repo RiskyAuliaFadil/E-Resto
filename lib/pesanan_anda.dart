@@ -1,15 +1,18 @@
+import 'package:e_resto/beranda.dart';
 import 'package:e_resto/pembayaran.dart';
+import 'package:e_resto/profile.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<Map<String, String>> menuItems; // Data menu
   final Map<int, int> selectedItems; // Index item dan jumlahnya
 
-  const CheckoutScreen({
+  CheckoutScreen({
     Key? key,
     required this.menuItems,
     required this.selectedItems,
-  }) : super(key: key);
+  }) 
+  ;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -24,6 +27,45 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       total += price * quantity;
     });
     return total;
+  }
+
+  int _selectedIndex = 0;
+
+  void _onNavBarTap(int index) {
+    if (_selectedIndex != index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+
+      // Navigasi berdasarkan index
+      switch (index) {
+        case 0:
+          // Stay di halaman HomePage
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+          break;
+        case 1:
+          // Pindah ke halaman CheckoutScreen
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => CheckoutScreen(
+          //             selectedItems: widget.selectedItem,
+          //             menuItems: menuItems,
+          //           )),
+          // );
+          break;
+        case 2:
+          // Pindah ke halaman ProfilePage
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+          break;
+      }
+    }
   }
 
   @override

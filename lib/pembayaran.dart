@@ -1,3 +1,4 @@
+import 'package:e_resto/cash_pembayaran.dart';
 import 'package:flutter/material.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -21,8 +22,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   int _calculateTotal() {
     int total = 0;
     widget.selectedItems.forEach((index, quantity) {
-      final price = int.parse(
-          widget.menuItems[index]['price']!.replaceAll(RegExp(r'[Rp\.]'), ''));
+      final price = int.parse(widget.menuItems[index]['price']!
+          .replaceAll(RegExp(r'[Rp\.\.]'), ''));
       total += price * quantity;
     });
     return total;
@@ -161,25 +162,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         if (_selectedPaymentMethod == null) {
                           _showValidationMessage();
                         } else {
-                          // Logika jika metode pembayaran telah dipilih
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Detail Total Pembayaran'),
-                                content: Text(
-                                  'Metode pembayaran: $_selectedPaymentMethod\nTotal: Rp ${_calculateTotal()}',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Tutup'),
-                                  ),
-                                ],
-                              );
-                            },
+                          // Arahkan ke halaman PaymentSuccessPage
+                          final orderDetails = widget.selectedItems.entries
+                              .map((entry) => {
+                                    "name": widget.menuItems[entry.key]['name'],
+                                    "price": int.parse(widget
+                                        .menuItems[entry.key]['price']!
+                                        .replaceAll(RegExp(r'[Rp\\.]'), '')),
+                                    "quantity": entry.value,
+                                  })
+                              .toList();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentSuccessPage(
+                                paymentMethod: _selectedPaymentMethod!,
+                                orderDetails: orderDetails,
+                              ),
+                            ),
                           );
                         }
                       },
